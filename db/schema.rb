@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_11_27_054107) do
-=======
+
 ActiveRecord::Schema.define(version: 2018_11_27_060708) do
->>>>>>> dc64d4ce589132a97a7f7130f9725fe58119c3da
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +44,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_060708) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "votes", id: :serial, force: :cascade do |t|
     t.string "votable_type"
     t.integer "votable_id"
@@ -63,8 +58,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_060708) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
->>>>>>> dc64d4ce589132a97a7f7130f9725fe58119c3da
-  add_foreign_key "images", "spots"
-  add_foreign_key "images", "users"
-  add_foreign_key "spots", "users"
+  # add_foreign_key "images", "spots"
+  # add_foreign_key "images", "users"
+  # add_foreign_key "spots", "users"
 end
