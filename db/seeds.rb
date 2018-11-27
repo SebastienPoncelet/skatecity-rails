@@ -9,6 +9,7 @@
 
 puts "Destroy all"
 Spot.destroy_all
+User.destroy_all
 
 
 # Seeding users
