@@ -4,7 +4,7 @@ class CreateSpots < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.float :geocoding
-      t.references :user_id, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

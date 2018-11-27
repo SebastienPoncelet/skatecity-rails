@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/anton-zaytsev/acts_as_rateable.git
+  revision: 01066eceb2d16e35be437b7392cc3375f1f377f7
+  specs:
+    acts_as_rateable (3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,7 +50,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    ajaxful_rating (2.2.9.1)
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -195,7 +200,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajaxful_rating (~> 2.2, >= 2.2.9.1)
+  acts_as_rateable!
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)

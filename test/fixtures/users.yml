@@ -2,10 +2,10 @@
 
 one:
   open_id: MyString
-  avatar_url: MyString
-  nickname: MyString
+  avatar: MyText
+  name: MyString
 
 two:
   open_id: MyString
-  avatar_url: MyString
-  nickname: MyString
+  avatar: MyText
+  name: MyString
