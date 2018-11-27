@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_053819) do
+ActiveRecord::Schema.define(version: 2018_11_27_060708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "spot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot_id"], name: "index_images_on_spot_id"
+    t.index ["user_id"], name: "index_images_on_user_id"
+  end
 
   create_table "spots", force: :cascade do |t|
     t.string "name"
@@ -22,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_053819) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cached_votes_total", default: 0
     t.index ["user_id"], name: "index_spots_on_user_id"
   end
 
@@ -33,5 +43,21 @@ ActiveRecord::Schema.define(version: 2018_11_27_053819) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "votes", id: :serial, force: :cascade do |t|
+    t.string "votable_type"
+    t.integer "votable_id"
+    t.string "voter_type"
+    t.integer "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+  end
+
+  add_foreign_key "images", "spots"
+  add_foreign_key "images", "users"
   add_foreign_key "spots", "users"
 end
