@@ -16,10 +16,9 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-# Adding a gem for ratings
-# gem 'ajaxful_rating', '~> 2.2', '>= 2.2.9.1'
-# Rating gem by antonzaytsev. acts_as_rateable.
-gem "acts_as_rateable", :git => "git://github.com/anton-zaytsev/acts_as_rateable.git"
+# Adding a gem for votes/likes
+# https://github.com/ryanto/acts_as_votable
+gem 'acts_as_votable', '~> 0.12.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
