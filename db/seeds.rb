@@ -7,6 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+puts "Destroy all"
+Spot.destroy_all
+User.destroy_all
+
+
 # Seeding users
 User.create(name: "Sophie")
 User.create(name: "Brian")
@@ -19,7 +24,4 @@ Spot.create(name: "Top Toys Skatepark", description: "Small prefab street setup,
 Spot.create(name: "Icon X Skatepark", description: "Wooden indoor park in Shanghai with fun looking street area with all the usual and a nice looking mini ramp.", user_id: 2)
 Spot.create(name: "Middle Longhua Road Skate", description: "A nice wide open concrete skatepark with plenty of room to session all obstacles.", user_id: 3)
 Spot.create(name: "Shanghai Skate Park", description: "This park is simply amazing! Its fukn huge and not just in area but sheer size.", user_id: 4)
-
-
-
 
