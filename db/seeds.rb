@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Destroy all"
+Spot.destroy_all
+
+
+
+puts "Creating Spot"
+
+user_id = 1
+
+10.times do
+  Spot.create( name: Faker::Name.name, description: Faker::BackToTheFuture.quote, geocoding: Faker::Business.credit_card_number, user_id: user_id)
+
+  user_id += 1
+end
+
+puts "Spots created"
