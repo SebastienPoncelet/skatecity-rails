@@ -9,3 +9,5 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     end
   end
 end
+
+# 20181127052836_create_users
