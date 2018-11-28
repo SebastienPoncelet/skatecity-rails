@@ -1,7 +1,11 @@
 class Api::V1::SpotsController < Api::V1::BaseController
-
   def index
-    @spots = Spot.all
+    # Add condition to check if any tags have been selected to decide what to show.
+    if params[:tags].empty?
+      @spots = Spot.all
+    else
+      @spots = Spot.tagged_with(params[:tags], :any => true)
+    end
   end
 
   def show
