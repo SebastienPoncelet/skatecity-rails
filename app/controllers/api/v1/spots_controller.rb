@@ -23,7 +23,7 @@ class Api::V1::SpotsController < Api::V1::BaseController
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
     else
-      render_error
+      # render_error
     end
   end
 
