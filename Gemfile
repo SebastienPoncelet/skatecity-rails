@@ -20,6 +20,10 @@ gem 'uglifier', '>= 1.3.0'
 # https://github.com/ryanto/acts_as_votable
 gem 'acts_as_votable', '~> 0.12.0'
 
+# This gem allows to have a virtual column on Spots table for tags.
+# https://github.com/mbleigh/acts-as-taggable-on/
+gem 'acts-as-taggable-on', '~> 6.0'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
