@@ -10,3 +10,6 @@ class CreateSpots < ActiveRecord::Migration[5.2]
     end
   end
 end
+
+
+# 20181126103104_create_spots
