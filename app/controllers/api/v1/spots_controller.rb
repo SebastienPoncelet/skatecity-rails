@@ -1,7 +1,11 @@
 class Api::V1::SpotsController < Api::V1::BaseController
-
   def index
-    @spots = Spot.all
+    # Add condition to check if any tags have been selected to decide what to show.
+    if params[:tag_list].empty?
+      @spots = Spot.all
+    else
+      @spots = Spot.tagged_with(params[:tag_list], :match_all => true)
+    end
   end
 
   def show
@@ -25,6 +29,6 @@ class Api::V1::SpotsController < Api::V1::BaseController
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :description, :geocoding, :user_id)
+    params.require(:spot).permit(:name, :description, :geocoding, :tag_list, :user_id)
   end
 end
