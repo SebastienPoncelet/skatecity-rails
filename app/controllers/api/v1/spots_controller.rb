@@ -25,6 +25,6 @@ class Api::V1::SpotsController < Api::V1::BaseController
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :description, :geocoding, :user_id)
+    params.require(:spot).permit(:name, :description, :geocoding, :tag_list, :user_id)
   end
 end
