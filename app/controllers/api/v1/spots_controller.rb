@@ -26,6 +26,8 @@ class Api::V1::SpotsController < Api::V1::BaseController
     # We associate the tag_list to the current spot instance according to the gem's rule
     @spot.tag_list.add(styles, parse: true)
 
+    # No more byebug!!!
+
     if @spot.save
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
