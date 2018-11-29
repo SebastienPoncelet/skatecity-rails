@@ -18,7 +18,14 @@ class Api::V1::SpotsController < Api::V1::BaseController
   end
 
   def create
-    @spot = Spot.new(spot_params)
+    # :styles is not an attribute of Spot, need to convert it to :tag_list.
+    styles = spot_params[:styles]
+    # We exclude :styles from spot_params to save in params as it can't accept it
+    params = spot_params.except(:styles)
+    @spot = Spot.new(params)
+    # We associate the tag_list to the current spot instance according to the gem's rule
+    @spot.tag_list.add(styles, parse: true)
+    byebug
     if @spot.save
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
@@ -30,6 +37,6 @@ class Api::V1::SpotsController < Api::V1::BaseController
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :description, :address, :styles, :user_id)
+    params.require(:spot).permit(:name, :description, :styles, :address, :user_id)
   end
 end
