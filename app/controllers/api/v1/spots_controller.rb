@@ -25,7 +25,7 @@ class Api::V1::SpotsController < Api::V1::BaseController
     @spot = Spot.new(params)
     # We associate the tag_list to the current spot instance according to the gem's rule
     @spot.tag_list.add(styles, parse: true)
-    byebug
+
     if @spot.save
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
@@ -40,7 +40,7 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
   def update
     @spot = Spot.find(params[:id])
-    @user = User.find(vote_params[:user_id])
+    @user = User.find(params[:user_id])
     # @spot = Spot.find(2)
     # @user = User.find(4)
 
@@ -67,6 +67,6 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
   def vote_params
     # Only need to pass on the user ID as we need to associate the vote for a spot to a user
-    params.require(:spot).permit(:user_id)
+    params.require(:spot).permit(:user_id, :id)
   end
 end
