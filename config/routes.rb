@@ -6,8 +6,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :spots, only: [ :index, :show, :create, :update]
-      resources :users, only: [ :index, :show ]
+      resources :spots, only: [:index, :show, :create, :update]
+      resources :users, only: [:index, :show]
+      # Don't need to have index and show because we can get the images through the spots
+      # example, spot.images will bring out all related images.
+      resources :images, only: [:create, :update]
     end
   end
 end

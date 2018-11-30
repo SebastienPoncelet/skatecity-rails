@@ -5,4 +5,12 @@ json.spot do
   json.user do
     json.extract! @spot.user, :open_id, :avatar, :name
   end
+
+  json.images do
+    json.array! @images do |image|
+      json.extract! image, :id, :url
+    end
+  end
+
+
 end
