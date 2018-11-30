@@ -49,6 +49,8 @@ class Api::V1::SpotsController < Api::V1::BaseController
     if @user.voted_for? @spot
       puts "This user already voted for this spot"
     else
+      # Associate the user to the spot to make sure he can't vote another time for the same spot
+      @spot.vote_by :voter => @user
       # Saving the current number of votes in a temporary variable
       spot_votes = @spot.cached_votes_total
       # Updating only one attribute to the current spot instance
@@ -67,8 +69,8 @@ class Api::V1::SpotsController < Api::V1::BaseController
     params.require(:spot).permit(:name, :description, :styles, :address, :user_id)
   end
 
-  def vote_params
-    # Only need to pass on the user ID as we need to associate the vote for a spot to a user
-    params.require(:spot).permit(:user_id, :id)
-  end
+  # def vote_params
+  #   # Only need to pass on the user ID as we need to associate the vote for a spot to a user
+  #   params.require(:spot).permit(:user_id, :id)
+  # end
 end
