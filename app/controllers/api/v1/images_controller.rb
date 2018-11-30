@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController
+class Api::V1::ImagesController < Api::V1::BaseController
   def new
     @image = Image.new
   end
@@ -6,7 +6,12 @@ class ImagesController < ApplicationController
   def create
     # Need to get the spot and user id to link the image to them
     @image = Image.new(image_params)
-    @image.save
+    if @image.save
+      render :show
+      # The render allows WeChat frontend to see what's going on when adding a new element.
+    else
+      # render_error
+    end
   end
 
   private
