@@ -1,7 +1,5 @@
 class LoginController < ApplicationController
 
-skip_before_action :verify_authenticity_token
-
 URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
 
 def wechat_params
@@ -19,12 +17,7 @@ def wechat_user
 end
 
 def login
-  # Would need to extract user avatar's URL when he logs in.
-  # Need to store the avatar in User instance.
-  open_id = wechat_user.fetch("openid")
-  puts "open_id", open_id
-  @user = User.find_or_create_by(open_id: open_id)
-  puts "user", @user.inspect
+  @user = User.find_or_create_by(open_id: wechat_user.fetch("openid"))
   render json: {
     userId: @user.id
   }
