@@ -1,16 +1,4 @@
 class ImagesController < ApplicationController
-  def index
-    # Need to show one image per card
-    # The image needs to be linked to the corresponding spot id
-    @images = Image.all
-  end
-
-  def show
-    # Sample 5 pictures linked to the spot being displayed
-    # The sampling
-    @images = Image.where(params[:spot_id])
-  end
-
   def new
     @image = Image.new
   end
@@ -18,6 +6,7 @@ class ImagesController < ApplicationController
   def create
     # Need to get the spot and user id to link the image to them
     @image = Image.new(image_params)
+    @image.save
   end
 
   private

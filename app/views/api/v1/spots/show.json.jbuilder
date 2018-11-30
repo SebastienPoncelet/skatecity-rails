@@ -11,6 +11,4 @@ json.spot do
       json.extract! image, :id, :url
     end
   end
-
-
 end
