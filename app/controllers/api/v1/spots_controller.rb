@@ -38,13 +38,19 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
     # ---------- Image Instance Creation ----------#
     # Saving Image information with one API call from frontend
-    @image = Image.new(image_params)
+    user_id = spot_params[:user_id]
+    p "user_id"
+    spot_id = @spot.id
+    p "spot_id"
+    url = image_params[:url]
+    p "url"
+    @image = Image.new(url: url, user_id: user_id, spot_id: spot_id)
 
     if @image.save
       # Adding the current Spot instance ID to the image instance being created.
-      @image[:spot_id] = @spot.id
-      @image.update
-      render :show
+      # @image[:spot_id] = @spot.id
+      # @image.update
+      # render :show
     else
       # render_error
     end
@@ -78,7 +84,7 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
   # Adding this method to get all image information to only have one API call from the frontend.
   def image_params
-    params.require(:image).permit(:url, :user_id)
+    params.require(:image).permit(:url)
   end
 end
 
