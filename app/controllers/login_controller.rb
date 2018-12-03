@@ -11,10 +11,8 @@ class LoginController < ApplicationController
   end
 
   def wechat_user
-    @wechat_response = RestClient.post(URL, wechat_params)
-    p @wechat_response
-    @wechat_user = JSON.parse(@wechat_response.body)
-    p @wechat_user
+    @wechat_response ||= RestClient.post(URL, wechat_params)
+    @wechat_user ||= JSON.parse(@wechat_response.body)
   end
 
   def login
