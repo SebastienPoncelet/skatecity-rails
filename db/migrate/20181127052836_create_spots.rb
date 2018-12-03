@@ -3,7 +3,9 @@ class CreateSpots < ActiveRecord::Migration[5.2]
     create_table :spots do |t|
       t.string :name
       t.text :description
-      t.float :geocoding
+      t.float :longitude
+      t.float :latitude
+      t.text :address, default: ""
       t.references :user, foreign_key: true
 
       t.timestamps
