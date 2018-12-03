@@ -8,7 +8,7 @@ class Spot < ApplicationRecord
 
   def geocode
     # API is http://lbs.amap.com/
-    if !self.address == ""
+    if self.address
       results = Geocoder.search(self.address) # array []
         if !results.first.nil?
           result = results.first.coordinates
