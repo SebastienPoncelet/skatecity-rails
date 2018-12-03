@@ -53,8 +53,8 @@ class Api::V1::SpotsController < Api::V1::BaseController
       @spot.vote_by :voter => @user
       # Saving the current number of votes in a temporary variable
       spot_votes = @spot.cached_votes_total
-      # Updating only one attribute to the current spot instance
-      @spot.update_attribute(:cached_votes_total, spot_votes + 1)
+      # Not necessary as the spot.vote_by not only links a user to a spot but also increments the vote.
+      # @spot.update_attribute(:cached_votes_total, spot_votes + 1)
       # puts @spot
     end
 
