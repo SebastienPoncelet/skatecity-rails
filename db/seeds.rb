@@ -7,10 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-puts "Destroy all"
+puts "Destroy everything"
 Spot.destroy_all
 User.destroy_all
-
 
 # Seeding users
 puts "Creating users"

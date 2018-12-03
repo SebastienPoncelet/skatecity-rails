@@ -11,14 +11,12 @@ class LoginController < ApplicationController
   end
 
   def wechat_user
-    @wechat_response = RestClient.post(URL, wechat_params)
-    p @wechat_response
-    @wechat_user = JSON.parse(@wechat_response.body)
-    p @wechat_user
+    @wechat_response ||= RestClient.post(URL, wechat_params)
+    @wechat_user ||= JSON.parse(@wechat_response.body)
   end
 
   def login
-    @user = User.find_or_create_by(open_id: @wx.fetch("openid"))
+    @user = User.find_or_create_by(open_id: wechat_user.fetch("openid"))
     render json: {
       userId: @user.id
     }
