@@ -14,7 +14,9 @@ class Api::V1::SpotsController < Api::V1::BaseController
   end
 
   def new
+    # Only one API call from frontend to save at the same time spot and image information
     @spot = Spot.new
+    @image = Image.new
   end
 
   def create
@@ -26,38 +28,43 @@ class Api::V1::SpotsController < Api::V1::BaseController
     # We associate the tag_list to the current spot instance according to the gem's rule
     @spot.tag_list.add(styles, parse: true)
 
-    # No more byebug!!!
-
     if @spot.save
+      @spot.geocode
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
+    else
+      # render_error
+    end
+
+    # ---------- Image Instance Creation ----------#
+    # Saving Image information with one API call from frontend
+    @image = Image.new(image_params)
+
+    if @image.save
+      # Adding the current Spot instance ID to the image instance being created.
+      @image[:spot_id] = @spot.id
+      @image.update
+      render :show
     else
       # render_error
     end
   end
 
   def edit
-
+    # Not necessary in this case as it's managed by WeChat frontend
   end
 
   def update
     @spot = Spot.find(params[:id])
     @user = User.find(params[:user_id])
-    # @spot = Spot.find(2)
-    # @user = User.find(4)
 
     if @user.voted_for? @spot
       puts "This user already voted for this spot"
     else
       # Associate the user to the spot to make sure he can't vote another time for the same spot
       @spot.vote_by :voter => @user
-      # Saving the current number of votes in a temporary variable
-      spot_votes = @spot.cached_votes_total
-      # Not necessary as the spot.vote_by not only links a user to a spot but also increments the vote.
-      # @spot.update_attribute(:cached_votes_total, spot_votes + 1)
-      # puts @spot
     end
-
+    # Vote gem syntax
     # @post.vote_by :voter => @user3
     # @user.voted_for? @comment1 # => true
     # @user.update_attribute(:reputation,1)
@@ -69,8 +76,11 @@ class Api::V1::SpotsController < Api::V1::BaseController
     params.require(:spot).permit(:name, :description, :styles, :address, :user_id)
   end
 
-  # def vote_params
-  #   # Only need to pass on the user ID as we need to associate the vote for a spot to a user
-  #   params.require(:spot).permit(:user_id, :id)
-  # end
+  # Adding this method to get all image information to only have one API call from the frontend.
+  def image_params
+    params.require(:image).permit(:url, :user_id)
+  end
 end
+
+
+# Need to ship the current spot instance id when saving the image
