@@ -39,6 +39,9 @@ gem 'rest-client'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Geocoder gem
+gem "geocoder"
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

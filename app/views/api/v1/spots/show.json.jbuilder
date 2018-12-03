@@ -1,5 +1,5 @@
 json.spot do
-  json.extract! @spot, :id, :name, :description, :geocoding, :user_id, :tag_list, :cached_votes_total
+  json.extract! @spot, :id, :name, :description, :address, :longitude, :latitude, :user_id, :tag_list, :cached_votes_total
 
   # Nesting user within the current spot to link data in API.
   json.user do
