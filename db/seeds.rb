@@ -35,8 +35,16 @@ Spot.create(name: "Middle Longhua Road Skate", description: "A nice wide open co
 Spot.create(name: "Shanghai Skate Park", description: "This park is simply amazing! Its fukn huge and not just in area but sheer size.", user_id: u4, address: "")
 
 puts "Spots created"
-# Adding tags to spots
 
+puts "creating image"
+Image.create(user_id:1, spot_id:1, url:"feqq" )
+Image.create(user_id:2, spot_id:2, url:"feqq" )
+Image.create(user_id:3, spot_id:3, url:"feqq" )
+Image.create(user_id:4, spot_id:4, url:"feqq" )
+Image.create(user_id:5, spot_id:5, url:"feqq" )
+puts "image created"
+
+# Adding tags to spots
 puts "Adding tags"
 spot1.tag_list.add("skateparks")
 spot1.save
