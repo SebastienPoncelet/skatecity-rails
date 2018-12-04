@@ -30,21 +30,16 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
     if @spot.save
       @spot.geocode
+      # ---------- Image Instance Creation ----------#
+      # Saving Image information with one API call from frontend
+      spot_id = @spot.id
+      user_id = spot_params[:user_id]
+      url = image_params[:url]
+      @image = Image.new(user_id: user_id, spot_id: spot_id, url: url)
+      @image.save
+
       render :show
       # The render allows WeChat frontend to see what's going on when adding a new element.
-    else
-      # render_error
-    end
-
-    # ---------- Image Instance Creation ----------#
-    # Saving Image information with one API call from frontend
-    @image = Image.new(image_params)
-
-    if @image.save
-      # Adding the current Spot instance ID to the image instance being created.
-      @image[:spot_id] = @spot.id
-      @image.update
-      render :show
     else
       # render_error
     end
@@ -78,7 +73,7 @@ class Api::V1::SpotsController < Api::V1::BaseController
 
   # Adding this method to get all image information to only have one API call from the frontend.
   def image_params
-    params.require(:image).permit(:url, :user_id)
+    params.require(:image).permit(:url)
   end
 end
 
