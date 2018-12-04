@@ -7,7 +7,7 @@ json.spot do
   end
 
   json.images do
-    json.array! @images do |image|
+    json.array! @spot.images do |image|
       json.extract! image, :id, :url
     end
   end
