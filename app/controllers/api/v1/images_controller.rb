@@ -1,3 +1,4 @@
+require 'json'
 class Api::V1::ImagesController < Api::V1::BaseController
   def new
     @image = Image.new
@@ -7,7 +8,7 @@ class Api::V1::ImagesController < Api::V1::BaseController
     # Need to get the spot and user id to link the image to them
     @image = Image.new(image_params)
     if @image.save
-      render :show
+      render json: @image
       # The render allows WeChat frontend to see what's going on when adding a new element.
     else
       # render_error
