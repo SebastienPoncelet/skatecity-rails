@@ -71,5 +71,3 @@ class Api::V1::SpotsController < Api::V1::BaseController
   end
 end
 
-
-# Need to ship the current spot instance id when saving the image
