@@ -6,6 +6,10 @@ class Spot < ApplicationRecord
   # DB commit, every time we create a new spot instance. The "geocode" method will be called on this instance.
   after_commit :geocode, on: :create
 
+  validates :name, presence: true, uniqueness: true
+  validates :description, presence: true
+  validates :address, presence: true
+
   def geocode
     # API is http://lbs.amap.com/
     if self.address
