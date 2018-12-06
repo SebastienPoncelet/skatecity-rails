@@ -1,12 +1,6 @@
 class Api::V1::SpotsController < Api::V1::BaseController
   def index
-    # Add condition to check if any tags have been selected to decide what to show.
-    # byebug
-    if params[:tag_list].nil? || params[:tag_list].empty?
-      @spots = Spot.all
-    else
-      @spots = Spot.tagged_with(params[:tag_list], :match_all => true)
-    end
+    @spots = Spot.all.order("created_at DESC")
   end
 
   def show
